@@ -56,6 +56,8 @@ class CollectionsExperiment{
         System.out.println(animals);
     }
 
+    //Sublists are views over ranges of lists
+
 }
 
 /* all collections extend java.util.Collection
