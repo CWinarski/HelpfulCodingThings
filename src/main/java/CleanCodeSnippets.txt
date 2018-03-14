@@ -1,0 +1,5 @@
+Classes with longer scopes have shorter names vice versa is true
+private function names long vid versa is true
+derived classes have longer names with adjectives Ex: subclass of accounts is savings account
+variables with short scopes have short names
+variables with long scopes have long names
