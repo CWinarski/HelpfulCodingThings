@@ -26,7 +26,7 @@ public class SetsExperiment {
         Based upon tree map, uses binary tree with a required sort order
         keeps elements in given order: see sortedSet and navigableSet
          */
-        Set<Animal> enumSet = new Enum<Animal>();// wont work need enums
+        //Set<Animal> enumSet = new Enum<Animal>(); wont work need enums
 
     }
 }
