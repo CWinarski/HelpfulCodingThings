@@ -1,0 +1,90 @@
+API: Application Programming Interface
+-
+
+* REST means REpresentational State Transfer:
+REST is a guildine for making applications that are scalable, vidible, protable, reliable, and able to perform better.
+
+REST has 6 constraints:
+- Concerns should be separated between clients and servers as in the client's problems are the clients and the sever's problems are the servers
+- It should be stateless; the communication between client and server should not be dependent on the client state. The  Client must include all info for the server
+- There should be layers in the system. Things such as gateways, firewalls, and proxies can exist between client and server
+- Responses from the server should be declared as cacheable or noncacheable
+- All interactions between client, sever, and intermediary components are based on the uniformity of their interfaces
+- CLients can execute code on demand inlucding javascript scripts, java applets, silverlight, etc.
+
+URI: Uniform Resource Identifier www.zipcoder.io
+
+GET:
+* Retrieves information from the given server using the given URI
+* HTTP is a form of GET
+
+Idempotency: GET HEAD PUT DELETE are requests that produce the same result no matter how many requests are made
+
+POST:
+* a request used to send data to the server using HTML forms. Doesn't need to know the URI of the resource9
+
+HEAD:
+* same as GET but transfers the status line and header section only. It is like a peak at the data without grabbing an actual representation of it
+
+PUT:
+*replaces all current representations of the target resource with the uploaded content
+
+DELETE:
+* removes all current representations of the target resource given by a URI. Requests for it to be done. It doesn't actually delete until the request is approved
+
+CONNECT:
+* Established a tunnel to the server identified by a given URI
+
+OPTIONS:
+Describes the communication options for the target resource
+
+TRACE:
+* performs a message loop-back test along the path to the target resource
+
+CRUD
+* create
+* read
+* update
+* delete
+
+HTTP Status Codes
+* 1xx Continue (100)
+* 2xx Success (200)
+* 3xx Redirection (300 Multiple Choices)
+* 4xx Client Error (400 Bad Request)
+* 5xx Server Error (500 Internal Server Error)
+
+
+Resources
+- a resource is anything that can be accessed or manipulated. The web provieds a URI for resources.
+- URIs are broken down into scheme:scheme-specific-part
+
+ex:
+scheme: scheme specific part
+http://www.apress.com/9781484208427
+
+URI Templates
+* http://blog.example.com/{year}/posts
+the brackets indicate that the year portion of the template is a variable
+
+Representation
+*RESTful resources are abstract entities.
+The data and metadata that make a RESTful resource needs to be serialized into a representation before it gets sent to a client.
+This representation can be viewed as a snapshot of a resource’s state at a given point in time.
+As in someone buying goods gets the product details as an HTML Webpage while a developer gets those same details in a XML or JSON
+so the actual datat isn't touched it is a representation of the data
+
+
+Content Negotiation is when a clent requests a particular representaton of the data. it can be done in two ways
+- Postfixing the URI with the desired representation
+    http://www.example. com/products/143.json
+    http://www.example. com/products/143.xml
+- Using the Accept header
+        ex:
+        Accept: <MIME_type>/<MIME_subtype>
+        Accept: <MIME_type>/*
+        Accept: */*
+
+
+Spring Web MVC Primer
+
