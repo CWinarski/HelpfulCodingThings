@@ -1,0 +1,33 @@
+Teach ourselves JavaScript and TypeScript
+- work in hackerrank more
+- go over labs
+- treat painful afternoon as a kata: refine as technique. DO it over and over as much as possible
+- Spring lexicon
+- when a framework has a small footprint. you can download and go
+- spring you have to get the config right
+- spring boot has a small foot print
+- JSON is a view
+
+REST:
+endpoints are public interfaces of your application
+to scale you can't have one device have all the information
+application cannot save state
+restful applications can't remember anything
+cache is in-memory database
+liskov's substitution principle works in api
+
+spring is a container
+inside the container is bean
+a bean is a POJO
+only have to worry about the domain of the problem
+
+logs are your best friend
+because when something goes wrong it tells you and helps you
+spring is a servlet: application runs as a program in a server
+JAR- Java archive resource
+your server is like tomcat
+
+ports are like calling into an office and you need to go to an extension
+each application needs it's own port
+
+Spring is all about annotations
