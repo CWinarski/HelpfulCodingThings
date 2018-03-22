@@ -85,6 +85,137 @@ Content Negotiation is when a clent requests a particular representaton of the d
         Accept: <MIME_type>/*
         Accept: */*
 
-
+========================================================================================================================
 Spring Web MVC Primer
 
+Spring web MVC is a web framework that simplifies Web and REST application development
+
+ORM maps two concepts: object oriented and relational. It allows the use of java objects as
+representation of a relational database
+JDBC - java database connectivity, connects java written programs to databases
+JMS - Java Message Service allows applications to create send and receive and read messages using loosely coupled communication
+
+
+Dependency injection:
+- This allows dependencies to be injected into components that need them
+- this allows those components to be loosely coupled by not needing to create their own dependencies
+
+Aspect Oriented Programming
+- it is a programming model that implements crosscutting concerns.
+- Logging, transactions metrics and security are some examples if concerns that span (crosscut)
+different parts of an application.
+- they don't deal with business logic and are often duplicated across the application
+- A Concern is a term that refers to a part of the system divided on the basis of the functionality
+- AOP provides a standardized mechanism called an aspect for encapsulating such concerns in a single location
+- These aspects are then weaved into other objects so that the crosscutting logic is automaticallu applied
+across the application.
+- Spring provides two-proxy implementations—JDK dynamic proxy and CGLIB proxy. If the target bean implements an interface,
+    Spring will use JDK dynamic proxy to create the AOP proxy.
+    If the class doesn't implement an interface, Spring uses CGLIB to create a proxy.
+- proxies are like debit cards for our banks. We use the card in place of money and provides a way
+to get cash if we need it, Java proxies do the same, They control and manage access to the object
+they are "protecting"
+
+==========================================================================================================
+Modern View Controller Pattern: MVC
+- it is a pattern for building decoupled web applications
+- decomposed the ui layer into 3 components
+  Model, View, Controller
+
+----------------------------------------------------------------------------------------------------------
+ Model:
+ - Represents the data or state
+   ex: info representing accounts transactions, and statements
+-Spring provides the org.springframework.ui.Model interface that serves as holder for model attributes
+
+ex:public interface Model {
+           Model addAttribute(String attributeName, Object attributeValue);
+           Model addAttribute(Object attributeValue);
+           Model addAllAttributes(Collection<?> attributeValues);
+           Model addAllAttributes(Map<String, ?> attributes);
+          }
+   Model mergeAttributes(Map<String, ?> attributes);
+   boolean containsAttribute(String attributeName);
+   Map<String, Object> asMap();
+
+
+----------------------------------------------------------------------------------------------------------
+View:
+- Provides visual representation of the model
+  ex: this is what the user interacts with by providing inputs and viewing the output
+  webpages displaying the accounts
+-Spring Web MVC supports a variety of view technologies such as JSP, Velocity, Freemarker, and XSLT.
+Spring Web MVC uses the org.springframework.web.servlet.View interface to accomplish this
+- The view interface has two methods
+- concrete implementations of the view interface are responsible fo the rendering of the response
+- this is accomplished by overriding the render method
+- the getContentType method returns the generated view content type
+ex:
+public interface View
+{
+        String getContentType();
+
+        void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse
+response) throws Exception;
+}
+
+----------------------------------------------------------------------------------------------------------
+Controller:
+
+- responsible for handling user actions such as button clicks. It then interacts with services or
+repositories to prepare the model and hands the prepared model over to an appropriate view
+- Controllers in Spring Web MVC are declared using the stereotype org.springframework.stereotype.
+Controller. A stereotype in Spring designates roles or responsibilities of a class or an interface.
+- The @Controller annotation designates the HomeController as a MVC Controller
+- The @RequestMapping annotation maps Web requests to handler classes and handler methods
+ex: Basic Controller
+@Controller
+public class HomeController {
+        @RequestMapping("/home.html")
+        public String showHomePage() {
+                return "home";
+} }
+
+-----------------------------------------------------------------------------------------------------------
+- The easiest way for a controller to work with a model object is by declaring it as a method parameter
+
+ex:
+@RequestMapping("/home.html")
+public String showHomePage(Model model) {
+        model.addAttribute("currentDate", new Date());
+        return "home";
+}
+
+----------------------------------------------------------------------------------------------------------
+@RequestParam
+- this annotation is uesed to bind servlet request parameters to handler/controller method paramters
+- the request parameter values are automatically converted to the specified method parameter type using type conversion
+- two examples
+
+@RequestMapping("/search.html")
+public String search(@RequestParam String query, @RequestParam("page") int pageNumber) {
+        model.put("currentDate", new Date());
+        return "home";
+}
+
+- When a method parameter is annotated using @RequestParam, the specified request
+parameter must be available in the client request. If the parameter is missing, Spring will throw a MissingServletRequestParameterException exception.
+
+@RequestMapping("/search.html")
+public String search(@RequestParam String query, @RequestParam(value="page", required=false)
+int pageNumber) {
+        model.put("currentDate", new Date());
+        return "home";
+}
+
+-----------------------------------------------------------------------------------------------------------
+@RequestMapping
+- an annotation used to map a web request to a handler class or handler method
+- it also provides several attributes that can be used to narrow down these mappings
+
+ POST method example
+@RequestMapping(value="/saveuser.html", method=RequestMethod.POST)
+public String saveUser(@RequestParam String username, @RequestParam String password) {
+        // Save User logic
+        return "success";
+}
