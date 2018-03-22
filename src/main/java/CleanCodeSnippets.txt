@@ -20,3 +20,73 @@ if a function is messing woth another level of abstraction is it doing more than
 it cannot cross levels of abstractions
 
 push down option to move functions
+
+
+------------Chapter 4   Function Structure-----------------------
+- A function should have only have maximum 3 function arguments
+- constructors follow the same rule
+- use setter functions instead
+- no boolean arguments because the function then does two things
+- innies not outies: no output arguments
+- don't pass a null into a function, it is like a psuedo boolean
+- defensive programming is smell unless using public apis
+- the stepdown rule: the immportant stuff at top the details at the bottom
+- public methods at the top, private methods at the bottom
+
+ ex: -> private variables               Abstract
+      -> Public Methods
+        -> private methods
+            -> private methods
+                -> private methods      Detailed
+
+- every function calls children functions
+- switch statements are the devil. They aren't object oriented because of the dependencey the cases have on external sources
+- partition app and main to keep independent deployable
+- long if statements have the same issue as switch statements
+
+
+Functional Programming
+- functional programming is to write programs with no assignment statements
+- there are no side effects
+
+Side Effects
+- temporal coupling depend on one thing happening before another
+- can resolve temporal coupling by putting the second function in the other
+- instead of having open() close() methods put close in open method
+
+- Functions that change state of the system should not return anything but can throw exceptions: command
+- functions that don't change the state of anything should return something: query
+
+- tell don't ask: tell the object what to do not ask the object what the state is
+
+
+Law of Demeter
+- You may call methods of objects that are:
+1) Passed as arguments
+2) created locally
+3) instance variables
+4) globals
+
+You may NOT call methods on objects that are:
+- returned from a previous method call
+- don't chain o.getx().gety().getZ().doSomething()
+
+
+Structured programming
+- all algorithms should be composed by sequence, selection, and  iteration
+
+Early Returns
+- mid loop returns make loop complicated
+- continues are fine but break is an unexpresed exit condition
+- little loops are fine with this. Big loops not so much
+
+Error Handling
+- Write error handling code before actual code
+- exceptions are better
+- exceptions are callers
+- throwing an exception should be scoped to the class
+- use unchecked exceptions. derive exceptions from runtime exception
+- don't use messages in exceptions unless there is a tidbit needed to pass along
+- null is not an error it is a value
+- trying is one thing (try block is one thing)
+- error handling is one thing
