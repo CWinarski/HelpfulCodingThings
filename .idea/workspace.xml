@@ -18,18 +18,8 @@
       <file leaf-file-name="API.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ApiAndWebStuff/API.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneralExperiments.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/GeneralExperiments.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+            <state relative-caret-position="607">
+              <caret line="330" column="2" lean-forward="false" selection-start-line="330" selection-start-column="2" selection-end-line="330" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -395,15 +385,15 @@
       <workItem from="1521394806910" duration="6312000" />
       <workItem from="1521413204043" duration="251000" />
       <workItem from="1521474809942" duration="748000" />
-      <workItem from="1521645619289" duration="14275000" />
+      <workItem from="1521645619289" duration="16563000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53591000" />
+    <option name="totallyTimeSpent" value="55879000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="718" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -811,8 +801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ApiAndWebStuff/API.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+        <state relative-caret-position="607">
+          <caret line="330" column="2" lean-forward="false" selection-start-line="330" selection-start-column="2" selection-end-line="330" selection-end-column="2" />
           <folding />
         </state>
       </provider>

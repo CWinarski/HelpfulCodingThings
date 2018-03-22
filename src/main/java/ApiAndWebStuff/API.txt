@@ -219,3 +219,126 @@ public String saveUser(@RequestParam String username, @RequestParam String passw
         // Save User logic
         return "success";
 }
+
+Accept and Content Type Header
+- REST clients typically use the Accept and content type headers to work with different
+representations
+- The accept header is used to indicate the representations that they accept
+- the content type header is used to indicate the media type of the request being sent to the server
+
+-----------------------------------------------------------------------------------------------------------
+Path Variables
+- The @RequestMapping annotation supports dynamic URIs via URI templates
+- URI templates are URIs with placeholders or variables. The @PathVariable
+annotation allows you to access and use these placeholders via method parameters
+
+PathVariable example:
+@RequestMapping("/users/{username}")
+public User getUser(@PathVariable("username") String username) {
+        User user = null;
+        // Code to construct user object using username
+        return user;
+}
+
+View Resolver
+- When a logical view
+  name is returned, a ViewResolver is employed to resolve the view to a View implementation.
+   If this process fails for some reason, a javax.servlet.ServletException is thrown. The ViewResolver interface has a single method
+
+   ViewResolver Interface example
+   public interface ViewResolver
+   {
+   View resolveViewName(String viewName, Locale locale) throws Exception;
+
+   }
+
+    InternalViewResolver example
+   @Bean
+   public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/jsp/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+   }
+
+Exception Handler:
+- Exceptions are part of any application and Spring provides the HandlerExceptionResolver mechanism for handling those unexpected exceptions.
+- The HandlerExceptionResolver abstraction is similar to the ViewResolver and is used to resolve exceptions to error views.
+
+HandlerExceptionResolver API
+public interface HandlerExceptionResolver {
+ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
+Object handler, Exception ex);
+}
+
+
+ExceptionHandler example
+@Controller
+public class HomeController {
+        @ExceptionHandler(SQLException.class)
+        public ResponseEntity handleSQLException() {
+ResponseEntity responseEntity = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+                return responseEntity;
+}
+@RequestMapping("/stream")
+        public void streamMovie(HttpServletResponse response) throws SQLException {
+} }
+
+-The @ExceptionHandler annotated methods can only handle exceptions that occur in the controller or its subclasses.
+If we need to handle SQL exceptions in other controllers, then we need to copy and paste the handleSQLException method in all of those controllers.
+- So Spring provides the @ControllerAdvice annotation. Methods in classes annotated with
+@ControllerAdvice get applied to all the @RequestMapping methods.
+
+GlobalExceptionHandler example @ControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+        @ExceptionHandler(SQLException.class)
+        public ResponseEntity handleSQLException() {
+ResponseEntity responseEntity = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+                return responseEntity;
+} }
+
+
+Interceptors
+- Spring Web MVC provides the notion of interceptors to implement concerns that crosscut across different handlers
+- Consider the scenario in which you want to prevent unauthenticated access to a set of controllers.
+An interceptor allows you to centralize this access logic without you having to copy and paste the code in every controller.
+
+Interceptors intercept requests:
+- Before the controller gets executed. This allows the interceptor to decide if it needs to continue the execution chain or return with an exception or custom response
+- After the controller gets executed but before the response is sent out. This allows the interceptor to provide any additional model objects to the view.
+- After the response is sent out allowing any resource cleanup.
+
+HandlerInterceptor API
+public interface HandlerInterceptor{
+    void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object
+handler, Exception ex);
+    void postHandle(HttpServletRequest request, HttpServletResponse response, Object
+handler, ModelAndView modelAndView);
+    boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object
+handler); }
+
+Spring Web MVC Interceptor example
+public class SimpleInterceptor extends HandlerInterceptorAdapter {
+        private static final Logger logger = Logger.getLogger(SimpleInterceptor.class);
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+        Object handler) throws Exception {
+        logger.info("Inside the prehandle");
+        return false;
+    }
+}
+
+- Interceptors can be registered in a Spring Web application using the InterceptorRegistry strategy
+- When an interceptor is added to the interceptor registry, the interceptor gets applied to all of the handler mappings
+
+Example registering interceptors
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.apress.springrest.web" })
+public class WebConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+registry.addInterceptor(new LocaleChangeInterceptor());
+registry.addInterceptor(new SimpleInterceptor()).addPathPatterns("/auth/**"); }
+}
+
+
