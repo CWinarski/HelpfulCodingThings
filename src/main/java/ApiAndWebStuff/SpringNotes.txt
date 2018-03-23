@@ -31,3 +31,28 @@ ports are like calling into an office and you need to go to an extension
 each application needs it's own port
 
 Spring is all about annotations
+
+
+Spring is an MVC framework
+
+models, views, controllers, services, repository
+
+independently set log level for everything individually
+Debug log is if you want to see everything
+MODULES are applications
+IOC: inversion of control. You need to take control when you need to. You have to know what
+- everything is going to happen. String container is in control. WHen you want to take control give annotation
+- dependency add functionality
+- don't add dependecy willy nilly
+- annotations are powerful and deadly
+- Security:
+- throwing a dependency in a pom is the same as having those classes
+
+with JPA you need to supply a default constructor because it goes through getters and setters
+you can have the same endpoint as long as there is a different method calling it (post, get, etc)
+
+with my SQL you have to set up tables in the data base but H2 does it for you
+<!---
+----> comments out the depe
+
+@Configuration
