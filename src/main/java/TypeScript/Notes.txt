@@ -1,0 +1,234 @@
+TypeScript
+-typscript are jsontextfiles names tsconfig.json
+- dynamically typed: variable
+- interface is a model (look up model in spring)
+- function is not  method but it still does things like methods
+
+Arrow functions are shorthand for defining functions
+
+var addNumbers = (a: number, b: number) => a + b;
+var addNumbers = (a: number, b: number) => {
+    return a + b;
+}
+var addNumbers = function (a: number, b: number) {
+return a + b; }
+
+
+Interfaces:
+- Interfaces can act not only as a contract for classes implementing it but also use it in functions, objects  and variables
+- interfaces can inherit from a class in the same way a subclass does from its super class
+
+Constructor
+  constructor(private artist: string, private title: string) {
+    }
+
+- you don't have to declare variables before the constructor if you add an access modifier
+typescript does it for you
+
+Properties and Methods
+
+ private songs: Song[] = [];
+    static maxSongCount: number = 30;
+
+    two ways to declare variables
+
+access methods using this keyword
+
+addSong(song: Song) {
+        if (this.songs.length >=Playlist.maxSongCount) {
+            throw new Error('Playlist is full');
+        }
+        this.songs.push(song);
+    }
+
+    Getters and Setters
+
+        get stockItem() {
+                return this._stockItem;
+}
+        set stockItem(item: StockItem) {
+                this._stockItem = item;
+}
+
+Class Heritage
+
+- There are two types of class heritage in TypeScript.
+ A class can implement an interface using the implements keyword
+ and a class can inherit from another class using the extends keyword.
+
+ - A class can implement multiple interfaces, with each interface being separated by a comma,
+ for example: implements Audio, Video.
+
+ Scope
+ - If you call a class method from an event, or use it as a callback, the original context of the method can be lost,
+ which results in problems using instance methods and instance properties
+
+- Lost context the this.count becomes undefined when registerclick is assigned to onclick
+ class ClickCounter {
+     private count = 0;
+     registerClick() {
+         this.count++;
+         alert(this.count);
+     }
+ }
+ var clickCounter = new ClickCounter();
+ document.getElementById('target').onclick = clickCounter.registerClick;
+
+ Context can be preserved with property and arrow functions
+ Preserving context with a property and an arrow function but less useful if the class doesn't
+ know when and where it would be called
+
+ class ClickCounter {
+     private count = 0;
+     registerClick = () => {
+         this.count++;
+         alert(this.count);
+     }
+ }
+
+ You can do function wrapping at point of call which creates closure that keeps context with function
+
+ document.getElementById('target').onclick = function () {
+         clickCounter.registerClick();
+ };
+
+
+OR Use Bind Function ** use this in casino lab!!
+- The bind function permanently sets the context for the method.
+It can be used more generally to permanently replace the context but here is
+fixes this particular issue
+
+var clickHandler = clickCounter.registerClick.bind(clickCounter);
+document.getElementById('target').onclick = clickHandler;
+
+- To test the type of a class instance, you use the instanceof operator
+// true
+isDisplay = display instanceof Display;
+// true (inherits from Display)
+isDisplay = television instanceof Display;
+// false
+isDisplay = hiFi instanceof Display;
+
+Modules:
+- modules are the most fundamental structural element when it comes to file organization and dynamically loading slices of your program
+- There are two popular standards for loading modules at runtime. CommonJS is a framework class library for JavaScript and has a pattern for loading modules.
+- Internal modules enclose their members within a function that limits their scope. The internal module name
+  is added to the global scope and the exported members can be accessed via this globally scoped module identifier.
+  External modules add nothing to the global scope
+
+- to make items available outside the method you have to label them as export
+
+// Available as Shipping.Ship export interface Ship {
+        name: string;
+        port: string;
+        displacement: number;
+}
+// Available as Shipping.Ferry export class Ferry implements Ship {
+        constructor(
+            public name: string,
+            public port: string,
+            public displacement: number) {
+} }
+    // Only available inside of the Shipping module
+    var defaultDisplacement = 4000;
+    class PrivateShip implements Ship {
+        constructor(
+            public name: string,
+            public port: string,
+            public displacement: number = defaultDisplacement) {
+} }
+
+
+- an import statement can be used within an internal
+module to provide an alias for another module or one of its members
+
+module Docking {
+    import Ship = Shipping.Ship;
+    export class Dock {
+        private dockedShips: Ship[] = [];
+        arrival(ship: Ship) {
+            this.dockedShips.push(ship);
+} }
+}
+var dock = new Docking.Dock();
+
+External Modules are for scaling large applications
+To use an external module, you use an import statement along with a call to the require function
+
+import Shipping = require('./Shipping');
+export class Dock {
+    private dockedShips: Shipping.Ship[] = [];
+    arrival(ship: Shipping.Ship) {
+        this.dockedShips.push(ship);
+} }
+
+- Module loading comes in two flavors. CommonJS is the pattern of choice for NodeJS and a program
+using CommonJS will simply load a module each time the require function is called
+
+- Module loading comes in two flavors. CommonJS is the pattern of choice for NodeJS and a program
+using CommonJS will simply load a module each time the require function is called
+
+var dependency = require("./CommonJSDependency");
+// your code
+
+
+Although the term module loading is used to describe loading source file dependencies,
+the result of the import is not restricted to modules. You can specify
+any module member to be used in place of the module using an export assignment
+
+function greet(name: string): void {
+    console.log('Hello ' + name);
+}
+export = greet;
+
+Module Merging
+-The main use of this would be to logically group subcomponents below a master component and have
+the master component as well as all subcomponents creatable using the new keyword
+
+// Class/Module Merging
+class Car {
+}
+module Car {
+    export class Engine {
+    }
+    export class GloveBox {
+    }
+}
+var car = new Car();
+var engine = new Car.Engine();
+var gloveBox = new Car.GloveBox();
+
+Generics
+Generic functions
+function reverse<T>(list: T[]) : T[] { var reversedList: T[] = [];
+    for (var i = (list.length - 1); i >=0; i--) {
+        reversedList.push(list[i]);
+}
+    return reversedList;
+}
+var letters = ['a', 'b', 'c', 'd'];
+var reversedLetters = reverse<string>(letters); // d, c, b, a
+var numbers = [1, 2, 3, 4];
+var reversedNumbers = reverse<number>(numbers); // 4, 3, 2, 1
+
+
+Generic Interface
+
+interface Repository<T, TId> {
+getById(id: TId): T; p
+ersist(model: T): TId;
+}
+
+class CustomerRepository implements Repository<Customer, CustomerId> {
+    constructor(private customers: Customer[]) {
+}
+
+Generic Classes
+
+class DomainId<T> {
+constructor(public id: T) {
+}
+    get value(): T {
+        return this.id;
+}
+}
