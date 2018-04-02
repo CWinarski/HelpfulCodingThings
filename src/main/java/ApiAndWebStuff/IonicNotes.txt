@@ -1,0 +1,103 @@
+Web components bundle up markup and styles into custom html elements
+Ionic Basics
+- ionic command line interface (cli) is separate from the ionic framework. The CLI installs the framwork for each project for you
+- generate new project:
+ionic start MyFirstApp blank (blank template)
+- cd MyFirstApp
+start app
+-ionic serve
+ctrl + c to stop the process
+
+to update ionic
+- sudo npm install -g ionic
+ then update package.json file changing ionic-angular version number
+ then run npm install
+
+ angular dependecies usually needed to be updated too
+
+ src contains app folder, pages folder,  theme folder, assests, folder, index.html
+
+ inside pageds folder, there is home folder. it is a component
+ component is made up of  a class definition
+ for every page in your app you need a newfolder here
+
+ bootstrapping means setting up the root component of your application
+
+ your code is transpiled to es6 and bundled in www folder
+ DONT EDIT CODE IN THE WWW FOLDER
+
+ config.xml tells cordova how to build your app for ios/android
+
+ Ionic CLI commands ionic serve -l launches ionic lab
+ ionic cordova plugin add pluginnamehere
+
+ Interpolation allows for components to be displayed
+ EX:
+ <input type="submit class="btn" value="{{ btnText }}">
+ you need the curly brackets
+
+ unless you do property binding
+  <input type="submit class="btn" [value]="btnText">
+
+  single brackets around value for one way binding. This instance is component to template
+
+  to use two way data binding
+  import  forms module in app.module
+-------------------------------------------------------------------------
+
+* an Ionic app is a bunch of components and page components
+* it has a root component or page
+* components are independent constructs that has inputs and outputs. They encapsulate the controller code, the view code, and the styles.
+
+Pages
+------
+* Generate page using: ionic g page pagenamehere
+* to use page declare it in app.module.ts
+  1) import
+  2) add to declarations entry components array in NgModule
+
+ Lazy Loading:
+ - the page is only loaded when it is requested by the app
+ - steps to lazy load:
+    1) create pagename.module.ts
+    2) import NgModule from '@angular/core' // ng is angular so calling in angular module
+    3) reference HomePage by a string 'HomePage'
+
+    EX:
+    import { NgModule } from '@angular/core';
+    import { IonicPageModule } from 'ionic-angular';
+    import { HomePage } from './home';
+
+    @NgModule({
+    declarations: [
+        HomePage,
+    ],
+    imports: [
+        IonicPageModule.forChild(HomePage),
+    ],
+    exports: [
+        HomePage
+    ]
+    })
+    export class HomePageModule {}
+
+
+    then import IonicPage ionic-angular and decorate HomePage with it
+
+    EX:
+    import { IonicPage } from 'ionic-angular';
+
+    @IonicPage()
+    @Component({
+    selector: 'page-home',
+    templateUrl: 'home.html'
+    })
+    export class HomePage {
+        /* ... */
+
+     this allows using HomePage witht he string 'HomePage' without needing to import it.
+
+Services
+-----------
+* singletons so they aren't affected by scope and can be accessed anywhere
+*  angular services are lazy instantiating

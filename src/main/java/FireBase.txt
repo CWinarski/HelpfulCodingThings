@@ -1,0 +1,52 @@
+#FireBase Config
+
+##What to download
+- `npm install angularfire2@*version compatable* --save --save-exact`
+	- Installs exact version of angular fire that you need to use firebase
+- `npm install firebase@*version compatable* --save --save-exact`
+	- Installs exact version of firebase
+- `npm install promise-polyfill --save`
+	- Installs promise polyfill but exact version doesn't matter
+
+-
+
+##What to import
+- import:
+	- `AngularFireModule` from 'angularfire2'
+	- `AngularFireDatabaseModule` from 'angularfire2/database
+	- `AngularFireAuthModule` from 'angularfire2/auth'
+- to `app.module.config`
+- add:
+	- ```export const firebaseConfig = {
+	     apiKey: "*insert api key*",
+	     authDomain: "example: wired-coffee-sample.firebase.com",
+	     databaseURL: "insert URL",
+	     storageBucket: "insert appspot url",
+	     messageSenderID: 'insert id from firebase'
+	      };```
+
+- add `AngularFireModule.initialzeApp(firebaseConfig)`, `AngularFireDatabaseModule`, and `AngularFireAuthModule` to imports section
+
+
+-
+
+##Genrate Login page
+- go to terminal and type `ionic g page login`
+- goto home.ts and edit this:
+	- ```log: any
+	contructor(){
+	this.log = 'LoginPage';
+	}```
+
+- Add button on homepage that allows you to go to login page
+- add a sign in/create account buttons with a pointer to the registration page
+- add two text fields
+- generate regpage with `ionic g page register`
+
+-
+
+##Registration Page
+- import homepage
+- import `AlertController` from ionic-angluar
+- then: `import * as firebase from 'firebase/app'`
+- goto https://ionicframework.com/docs/native/firebase/ for more info

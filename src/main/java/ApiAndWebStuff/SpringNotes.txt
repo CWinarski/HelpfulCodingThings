@@ -68,3 +68,6 @@ JSON JavaScript Object Notation
 Spring boot
 - resoruces are just relevant things for your projects
 DAO class that gives info from datatbase
+
+- focus on typescript and angular groups of 2
+- familarize yourself with jasmine unit test for javascript/typescript

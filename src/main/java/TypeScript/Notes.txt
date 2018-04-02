@@ -232,3 +232,35 @@ constructor(public id: T) {
         return this.id;
 }
 }
+
+Ionic uses angular
+Ionic is angular
+passon tea lemonade
+
+
+Use homebrew to configure stuff
+
+run brew doctor before intstalling new things
+sudo: do super user
+don't always use sudo!
+chown change owner
+$(whoami) to see who user is
+
+learn bash!!!!
+install homebrew
+install node
+install ionic with node
+
+
+Start Ionic project
+ionic new project name
+
+website
+ng new projectname
+cd projectname
+ng serve: starts up small server  put it at browser port
+
+one way data bind (click) you bind to an object(so binding to click)
+two way data binding [()]
+
+module
